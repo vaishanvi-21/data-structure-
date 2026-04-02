@@ -1,0 +1,132 @@
+#include<iostream>
+using namespace std;
+
+template<class T>
+struct node
+{
+    int data;
+  
+    struct node *next;
+}; 
+template<class T>
+class Queue
+{
+  public:
+  
+    struct node<T>* head;
+    struct node<T>* temp;
+    int iCount;
+    
+    Queue();
+    void enQueue(T no);
+    int dequeue();
+    void Display();
+    int Count();
+
+   
+}; 
+   template<class T>
+    Queue<T>::Queue()
+    {
+        head=NULL;
+        iCount=0;
+    }  
+    template<class T>
+    void Queue<T>:: enQueue(T no)
+    {
+        struct node<T>* newn=NULL;
+        struct node<T>* temp=NULL;
+        newn=new node<T>;
+        newn->data=no;
+        newn->next=NULL;
+        if(head==NULL)
+        {
+            head=newn;
+        }
+        else 
+        {
+            temp=head;
+            while(temp->next!=NULL)
+            {
+                temp=temp->next;
+
+            }
+            temp->next=newn;
+
+        }
+        iCount++;
+
+    }
+    template<class T>
+    int Queue<T>:: dequeue()
+    {
+        struct node<T>* temp=NULL;
+       int no=-1;
+       if(head==NULL)
+       {
+         cout<<"stack is empty\n";
+       }
+       else if(head->next!=NULL)
+       {
+           no =head->data;
+           delete head;
+           head=NULL;
+       }
+       else
+       {
+        no=head->data;
+        temp=head;
+        head=head->next;
+        delete temp;
+       }
+       iCount--;
+       return -1;
+    }
+    template<class T>
+    void Queue<T>:: Display()
+    {
+     cout<<"element of linked list:\n";
+
+        struct node<T>* temp=head;
+         while(head!=NULL)
+         {
+            cout<<"|"<<head->data<<"| ";
+            head=head->next;
+         }
+         iCount++;
+
+    }
+    template<class T>
+    int Queue<T>:: Count()
+    {
+       
+
+        return iCount;
+
+    }
+  
+ 
+
+int main()
+{
+   Queue<int>qobj;
+    
+    int iret=0;
+    
+    qobj.enQueue(101);
+    qobj.enQueue(51);
+    qobj.enQueue(21);
+    
+    qobj.enQueue(11);
+
+    qobj.Display();
+    iret=qobj.dequeue();
+    cout<<"removed elemeny is:\n"<<iret;
+
+    qobj.Display();
+    iret=qobj.dequeue();
+    cout<<"removed elemeny is:\n"<<iret;
+
+
+    return 0;
+}
